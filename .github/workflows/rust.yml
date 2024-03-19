@@ -83,13 +83,9 @@ jobs:
         cp -r /root/.config/* $HOME/.config
 
     - name: Checkout commit that triggered run
-      working-directory: /home/calyx
-      run: |
-        git init
-        git remote add origin https://github.com/${{ github.repository }}.git
-        git fetch --all
-        git checkout -f $GITHUB_SHA
-        git clean -fd
+      uses: actions/checkout@v4
+      env:
+        GITHUB_WORKSPACE: /home/calyx
 
     - name: Build
       uses: actions-rs/cargo@v1
@@ -134,13 +130,12 @@ jobs:
         cp -r /root/.config/* $HOME/.config
 
     - name: Checkout commit that triggered run
-      working-directory: /home/calyx
-      run: |
-        git init
-        git remote add origin https://github.com/${{ github.repository }}.git
-        git fetch --all
-        git checkout -f $GITHUB_SHA
-        git clean -fd
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+      env:
+        GITHUB_WORKSPACE: /home/calyx
+
 
     - name: Install calyx-py & MrXL
       working-directory: /home/calyx
@@ -193,13 +188,9 @@ jobs:
         cp -r /root/.config/* $HOME/.config
 
     - name: Checkout commit that triggered run
-      working-directory: /home/calyx
-      run: |
-        git init
-        git remote add origin https://github.com/${{ github.repository }}.git
-        git fetch --all
-        git checkout -f $GITHUB_SHA
-        git clean -fd
+      uses: actions/checkout@v4
+      env:
+        GITHUB_WORKSPACE: /home/calyx
 
     - name: Build
       uses: actions-rs/cargo@v1
